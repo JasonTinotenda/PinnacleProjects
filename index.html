@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pinnacle Construction and Projects | Kempton Park, South Africa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --primary-blue: #0ea5e9; /* A bright, sky-blue, corresponds to Tailwind's sky-500 */
+            --dark-blue: #0284c7; /* Corresponds to sky-600 */
+            --text-dark: #111827; /* Near black for high contrast, corresponds to gray-900 */
+            --text-secondary: #4b5563; /* Gray for subtitles, corresponds to gray-600 */
+            --text-light: #f9fafb; /* Corresponds to gray-50 */
+            --bg-light: #ffffff; /* Clean white background */
+            --bg-off-white: #f9fafb; /* Off-white for sections, corresponds to gray-50 */
+            --bg-dark: #0f172a; /* Corresponds to slate-900 */
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        /* Custom class definition from original file */
+        .text-pinnacle-blue {
+            color: var(--primary-blue);
+        }
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+        }
+        #hero-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(15, 23, 42, 0.6); /* bg-dark with opacity */
+        }
+        .section-heading {
+            font-weight: 800;
+            font-size: 2.5rem; /* 40px */
+            line-height: 1.2;
+            letter-spacing: -0.025em;
+            text-align: center;
+        }
+        @media (min-width: 768px) {
+            .section-heading {
+                font-size: 3rem; /* 48px */
+            }
+        }
+        .section-subheading {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-top: 1.5rem;
+            max-width: 42rem; /* 672px */
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 1.125rem; /* 18px */
+            line-height: 1.7;
+        }
+        .btn {
+            display: inline-block;
+            padding: 0.875rem 2rem;
+            border-radius: 0.5rem;
+            font-weight: 700;
+            text-align: center;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            cursor: pointer;
+            transform: translateY(0);
+        }
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px -10px rgba(0,0,0,0.2);
+        }
+        .btn-primary {
+            background-color: var(--primary-blue);
+            color: var(--text-light);
+        }
+        .btn-primary:hover {
+            background-color: var(--dark-blue);
+        }
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary-blue);
+            border: 2px solid var(--primary-blue);
+        }
+        .btn-secondary:hover {
+            background-color: var(--primary-blue);
+            color: var(--text-light);
+        }
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+            padding: 0.25rem 0;
+            font-size: 0.875rem;
+            line-height: 1.5rem;
+            font-weight: 600;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--primary-blue);
+            transition: width 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .header-light .nav-link { color: var(--text-light); }
+        .header-dark .nav-link { color: var(--text-dark); }
+        .header-dark .nav-link:hover { color: var(--primary-blue); }
+
+        .sticky-nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background-color: var(--text-light);
+            backdrop-filter: blur(10px);
+            opacity: 0.95;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.07);
+            transition: all 0.3s ease-in-out;
+        }
+        /* Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Focus states for accessibility */
+        *:focus-visible {
+            outline: 3px solid var(--dark-blue);
+            outline-offset: 2px;
+            border-radius: 0.25rem;
+        }
+        /* Testimonial Carousel Styles */
+        .testimonial-carousel-container { position: relative; }
+        .testimonial-carousel-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .testimonial-slide {
+            min-width: 100%;
+            padding: 0 1rem;
+        }
+        @media (min-width: 768px) { .testimonial-slide { min-width: 50%; } }
+        @media (min-width: 1024px) { .testimonial-slide { min-width: 33.3333%; } }
+
+        /* Our Process Section Timeline */
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2.5rem;
+            padding-left: 2.5rem;
+        }
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.25rem;
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: 50%;
+            background-color: var(--primary-blue);
+            z-index: 1;
+        }
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 0.6875rem; /* 11px */
+            top: 2rem;
+            bottom: 0;
+            width: 2px;
+            background-color: #e5e7eb; /* gray-200 */
+        }
+        .timeline-item:last-child::after {
+            display: none;
+        }
+
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header & Navigation -->
+    <header id="header" class="absolute inset-x-0 top-0 z-50 header-light">
+        <nav class="container mx-auto flex items-center justify-between p-6 lg:px-8" aria-label="Global">
+            <div class="flex lg:flex-1">
+                <a href="#" class="-m-1.5 p-1.5 flex items-center transition-colors">
+                    <img src="assets/pcp-logo2.png" alt="Pinnacle Construction Logo" class="w-50 h-20 mr-2">
+                </a>
+            </div>
+            <div class="flex lg:hidden">
+                <button id="mobile-menu-open-button" type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 transition-colors">
+                    <span class="sr-only">Open main menu</span>
+                    <i data-lucide="menu" class="h-6 w-6"></i>
+                </button>
+            </div>
+            <div class="hidden lg:flex lg:gap-x-12">
+                <a href="#about" class="nav-link">About</a>
+                <a href="#services" class="nav-link">Services</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#faq" class="nav-link">FAQ</a>
+            </div>
+            <div class="hidden lg:flex lg:flex-1 lg:justify-end">
+                <a href="#contact" class="btn btn-primary text-sm">Contact Us</a>
+            </div>
+        </nav>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden" role="dialog" aria-modal="true">
+            <div class="fixed inset-0 z-50 bg-gray-900/50" id="mobile-menu-backdrop"></div>
+            <div id="mobile-menu-panel" class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-3 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10 transform translate-x-full transition-transform duration-300 ease-in-out">
+                <div class="flex items-center justify-between">
+                    <a href="#" class="-m-1.5 p-1.5 flex items-center transition-colors">
+                        <img src="assets/pcp-logo2.png" alt="Pinnacle Construction Logo" class="w-20 h-20 mr-2">
+                    </a>
+                    <button id="mobile-menu-close-button" type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700">
+                        <span class="sr-only">Close menu</span>
+                        <i data-lucide="x" class="h-6 w-6"></i>
+                    </button>
+                </div>
+                <div class="mt-6 flow-root">
+                    <div class="-my-6 divide-y divide-gray-500/10">
+                        <div class="space-y-2 py-6">
+                            <a href="#about" class="mobile-nav-link -mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">About</a>
+                            <a href="#services" class="mobile-nav-link -mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Services</a>
+                            <a href="#projects" class="mobile-nav-link -mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Projects</a>
+                            <a href="#faq" class="mobile-nav-link -mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">FAQ</a>
+                        </div>
+                        <div class="py-6">
+                            <a href="#contact" class="mobile-nav-link -mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Contact Us</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- 1. Hero Section -->
+        <section class="hero-section flex items-center justify-center text-center text-white">
+            <video autoplay loop muted playsinline id="hero-video" poster="assets/wallpaper.jpg">
+                <source src="assets/hero-vid.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="hero-overlay"></div>
+            <div class="container mx-auto px-6 z-10 relative">
+                <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black uppercase tracking-wide leading-tight reveal">Complete Solution for All Construction Projects</h1>
+                <p class="mt-6 text-lg md:text-xl max-w-3xl mx-auto reveal" style="transition-delay: 200ms;">Our Motto Is To Deliver Quality.</p>
+                <div class="mt-10 space-y-4 md:space-y-0 md:space-x-4 reveal" style="transition-delay: 400ms;">
+                    <a href="#quote-calculator" class="btn btn-primary text-lg">Get an Instant Quote</a>
+                    <a href="#contact" class="btn btn-secondary text-lg border-2 border-white text-white hover:bg-white hover:text-sky-500">Book a Free Consultation</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. About Us Section -->
+        <section id="about" class="py-24 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <div class="grid md:grid-cols-2 gap-16 items-center">
+                    <div class="reveal">
+                        <img loading="lazy" src="assets/wallpaper.jpg" alt="A team of construction workers planning on a blueprint at a worksite." class="rounded-lg shadow-2xl">
+                    </div>
+                    <div class="reveal" style="transition-delay: 200ms;">
+                        <h2 class="section-heading text-left">About Pinnacle Construction</h2>
+                        <p class="mt-6 text-gray-600 leading-relaxed">Pinnacle Construction and Projects is a dynamic construction firm based in Kempton Park, serving clients throughout South Africa. Established in 2023, the company leverages over a decade of experience in the industry to offer tailored turnkey solutions in asphalt surfacing, road construction, and brick paving.</p>
+                        <p class="mt-4 text-gray-600 leading-relaxed">Renowned for professionalism, safety, and high-quality workmanship, Pinnacle is committed to delivering innovative solutions with premium materials. Our diverse range of services caters to residential, commercial, and municipal clients, ensuring satisfaction and excellence in every project.</p>
+                        <div class="mt-8 p-6 bg-sky-100 border-l-4 border-sky-500">
+                            <p class="text-gray-900 font-semibold">Our expert asphalt (tar) and brick paving solutions cater to all your paving needs. With our locally approved services for quality and peace of mind.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Services Section -->
+        <section id="services" class="py-24 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <h2 class="section-heading">Our Expertise</h2>
+                <p class="section-subheading">Comprehensive solutions tailored to your project's needs, from groundworks to the final finishing touches.</p>
+                <div class="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 reveal">
+                        <div class="flex items-center justify-center bg-sky-100 rounded-full w-16 h-16 mb-6">
+                            <i data-lucide="hard-hat" class="w-8 h-8 text-sky-600"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Civil Eng & Groundworks</h3>
+                        <p class="text-sm text-gray-500 mb-4 h-16">Large-scale infrastructure, road maintenance, and all foundational site preparation.</p>
+                        <ul class="space-y-2 text-gray-600 list-disc list-inside text-sm">
+                            <li>Road Tarring & Potholes</li>
+                            <li>Asphalt Rejuvenation</li>
+                            <li>Speed Humps & Road Marking</li>
+                            <li>Earthworks & Tree Felling</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 reveal" style="transition-delay: 150ms;">
+                        <div class="flex items-center justify-center bg-sky-100 rounded-full w-16 h-16 mb-6">
+                           <i data-lucide="dribbble" class="w-8 h-8 text-sky-600"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Outdoor & Amenity</h3>
+                        <p class="text-sm text-gray-500 mb-4 h-16">Creation of specific outdoor recreational areas, driveways, and aesthetic features.</p>
+                        <ul class="space-y-2 text-gray-600 list-disc list-inside text-sm">
+                           <li>Tennis & Netball Courts</li>
+                           <li>Swimming Pools</li>
+                           <li>Landscaping</li>
+                           <li>All Driveway Types</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 reveal" style="transition-delay: 300ms;">
+                        <div class="flex items-center justify-center bg-sky-100 rounded-full w-16 h-16 mb-6">
+                            <i data-lucide="layers" class="w-8 h-8 text-sky-600"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Paving & Hardscaping</h3>
+                         <p class="text-sm text-gray-500 mb-4 h-16">Installation of various paving materials and site-specific hardscape structures.</p>
+                        <ul class="space-y-2 text-gray-600 list-disc list-inside text-sm">
+                           <li>Brick & Interlocking Paving</li>
+                           <li>Cobblestone Paving</li>
+                           <li>3D & Bevel Paving</li>
+                           <li>Kerbstone Laying Service</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 reveal" style="transition-delay: 450ms;">
+                        <div class="flex items-center justify-center bg-sky-100 rounded-full w-16 h-16 mb-6">
+                           <i data-lucide="building-2" class="w-8 h-8 text-sky-600"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">General Building</h3>
+                         <p class="text-sm text-gray-500 mb-4 h-16">General construction of buildings and specialized support structures.</p>
+                        <ul class="space-y-2 text-gray-600 list-disc list-inside text-sm">
+                           <li>Building Construction</li>
+                           <li>Retaining Walls</li>
+                           <li>Renovations & Extensions</li>
+                           <li>Slurry & Crack Seal</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Projects / Portfolio Section -->
+        <section id="projects" class="py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <h2 class="section-heading">Our Projects</h2>
+                <p class="section-subheading">A showcase of our commitment to quality, durability, and aesthetics in every project we undertake.</p>
+                
+                <div id="portfolio-filters" role="tablist" aria-label="Project Categories" class="flex justify-center flex-wrap gap-2 mt-12 reveal">
+                    <button role="tab" aria-selected="true" class="filter-btn active-filter px-5 py-2 rounded-full font-semibold text-sm transition" data-filter="all">All</button>
+                    <button role="tab" aria-selected="false" class="filter-btn px-5 py-2 rounded-full font-semibold text-sm transition" data-filter="civil">Civil & Groundworks</button>
+                    <button role="tab" aria-selected="false" class="filter-btn px-5 py-2 rounded-full font-semibold text-sm transition" data-filter="outdoor">Outdoor & Amenity</button>
+                    <button role="tab" aria-selected="false" class="filter-btn px-5 py-2 rounded-full font-semibold text-sm transition" data-filter="paving">Paving & Hardscaping</button>
+                    <button role="tab" aria-selected="false" class="filter-btn px-5 py-2 rounded-full font-semibold text-sm transition" data-filter="building">General Building</button>
+                </div>
+                
+                <div id="portfolio-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
+                    <!-- Projects will be injected here by JS -->
+                </div>
+                
+                <div class="text-center mt-12 reveal">
+                     <button id="load-more-projects" class="btn btn-primary inline-flex items-center justify-center">
+                        <span id="load-more-text">Load More Projects</span>
+                        <svg id="load-more-spinner" class="animate-spin ml-3 h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Why Choose Us Section -->
+        <section id="why-choose-us" class="py-24 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <h2 class="section-heading">Why Choose Pinnacle</h2>
+                <p class="section-subheading">We combine quality workmanship, superior knowledge and fair prices to provide you with service unmatched by our competitors.</p>
+                <div class="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="text-center p-8 reveal bg-white rounded-lg shadow-sm hover:shadow-xl transition-shadow duration-300">
+                        <div class="flex items-center justify-center bg-sky-100 rounded-full w-20 h-20 mb-6 mx-auto">
+                            <i data-lucide="award" class="w-10 h-10 text-sky-600"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Quality Workmanship</h3>
+                        <p class="text-gray-500 text-sm">We take pride in our craft, delivering durable and aesthetically pleasing results that stand the test of time.</p>
+                    </div>
+                    <div class="text-center p-8 reveal bg-white rounded-lg shadow-sm hover:shadow-xl transition-shadow duration-300" style="transition-delay: 150ms;">
+                        <div class="flex items-center justify-center bg-sky-100 rounded-full w-20 h-20 mb-6 mx-auto">
+                            <i data-lucide="shield-check" class="w-10 h-10 text-sky-600"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Safety First</h3>
+                        <p class="text-gray-500 text-sm">Our commitment to safety protocols ensures a secure worksite for our team, our clients, and the public.</p>
+                    </div>
+                    <div class="text-center p-8 reveal bg-white rounded-lg shadow-sm hover:shadow-xl transition-shadow duration-300" style="transition-delay: 300ms;">
+                        <div class="flex items-center justify-center bg-sky-100 rounded-full w-20 h-20 mb-6 mx-auto">
+                           <i data-lucide="timer" class="w-10 h-10 text-sky-600"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">On-Time Delivery</h3>
+                        <p class="text-gray-500 text-sm">We respect your time. Our team is dedicated to completing projects on schedule and within budget.</p>
+                    </div>
+                    <div class="text-center p-8 reveal bg-white rounded-lg shadow-sm hover:shadow-xl transition-shadow duration-300" style="transition-delay: 450ms;">
+                        <div class="flex items-center justify-center bg-sky-100 rounded-full w-20 h-20 mb-6 mx-auto">
+                           <i data-lucide="handshake" class="w-10 h-10 text-sky-600"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Transparent Pricing</h3>
+                         <p class="text-gray-500 text-sm">We provide clear, detailed quotes with no hidden fees, ensuring you understand every aspect of your investment.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 6. Testimonials Section -->
+        <section id="testimonials" class="py-24 bg-off-white">
+            <div class="container mx-auto px-6">
+                <h2 class="section-heading">What Our Clients Say</h2>
+                <p class="section-subheading">We are proud to have earned the trust of our clients. Here’s what they have to say about their experience with Pinnacle Projects.</p>
+                <div class="testimonial-carousel-container mt-16 overflow-hidden reveal">
+                    <div id="testimonial-track" class="testimonial-carousel-track">
+                        <!-- Testimonials will be injected here -->
+                    </div>
+                </div>
+                 <div class="mt-8 flex justify-center gap-3">
+                    <button id="testimonial-prev" aria-label="Previous testimonial" class="p-2 rounded-full bg-gray-200 hover:bg-gray-300 transition-colors"><i data-lucide="arrow-left" class="w-5 h-5"></i></button>
+                    <button id="testimonial-next" aria-label="Next testimonial" class="p-2 rounded-full bg-gray-200 hover:bg-gray-300 transition-colors"><i data-lucide="arrow-right" class="w-5 h-5"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. Our Process Section -->
+        <section id="our-process" class="py-24 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <h2 class="section-heading">Our Process</h2>
+                <p class="section-subheading">A streamlined and transparent process to bring your vision to life, ensuring clarity and quality at every step.</p>
+                <div class="mt-16 max-w-3xl mx-auto">
+                    <div class="reveal">
+                        <div class="timeline-item">
+                            <h3 class="text-xl font-bold text-gray-900">Step 1: Consultation & Quote</h3>
+                            <p class="mt-2 text-gray-600">We start with a detailed discussion to understand your needs, followed by a transparent, no-obligation quote.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h3 class="text-xl font-bold text-gray-900">Step 2: Planning & Design</h3>
+                            <p class="mt-2 text-gray-600">Our experts create a comprehensive plan and design, ensuring every detail aligns with your vision and our quality standards.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h3 class="text-xl font-bold text-gray-900">Step 3: Construction & Management</h3>
+                            <p class="mt-2 text-gray-600">Skilled teams execute the plan with precision, managed by experienced project leaders to ensure a smooth workflow.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h3 class="text-xl font-bold text-gray-900">Step 4: Final Inspection & Handover</h3>
+                            <p class="mt-2 text-gray-600">We conduct a thorough final inspection with you to guarantee your complete satisfaction before project handover.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. Instant Quote Calculator -->
+        <section id="quote-calculator" class="py-24 bg-off-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center reveal">
+                    <h2 class="section-heading">Get an Instant Quote</h2>
+                    <p class="section-subheading">A quick estimate for your project. For a precise quote, please contact us for a site inspection.</p>
+                </div>
+                <div class="mt-16 max-w-4xl mx-auto bg-white p-8 rounded-lg grid md:grid-cols-2 gap-8 reveal">
+                    <div class="space-y-6">
+                        <div>
+                            <label for="serviceType" class="block text-sm font-medium text-gray-700 mb-1">Select Service</label>
+                            <select id="serviceType" class="w-full py-3 px-4 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500">
+                                <option value="asphalt">Asphalt Surfacing</option>
+                                <option value="potholes">Pothole Repair</option>
+                                <option value="paving">Brick Paving</option>
+                                <option value="cobblestone">Cobblestone Paving</option>
+                                <option value="pool">Swimming Pool (Basic)</option>
+                                <option value="tennis_court">Tennis/Netball Court</option>
+                                <option value="retaining_wall">Retaining Wall</option>
+                                <option value="building">General Building</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="area" class="block text-sm font-medium text-gray-700 mb-1">Area (in square meters)</label>
+                            <input type="number" id="area" placeholder="e.g., 50" class="w-full py-3 px-4 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500">
+                        </div>
+                        <div>
+                            <label for="surfaceCondition" class="block text-sm font-medium text-gray-700 mb-1">Project Complexity</label>
+                            <select id="surfaceCondition" class="w-full py-3 px-4 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500">
+                                <option value="standard">Standard Duty / Flat Surface</option>
+                                <option value="heavy">Heavy Duty / Complex</option>
+                                <option value="premium">Premium / Custom Design</option>
+                            </select>
+                        </div>
+                        <button id="calculateQuoteBtn" class="w-full btn btn-primary text-base">Calculate Estimate</button>
+                    </div>
+                    <div class="bg-gray-50 rounded-lg p-8 flex flex-col justify-center items-center text-center">
+                        <h3 class="text-xl font-bold text-gray-800">Your Estimated Cost</h3>
+                        <p id="quoteResult" class="text-5xl font-black text-sky-500 my-4">R 0.00</p>
+                        <p class="text-xs text-gray-500 mb-4">This is a budgetary estimate only. A final quote requires a site visit and detailed assessment.</p>
+                        <a href="#contact" class="bg-gray-800 text-white py-2 px-6 rounded-md font-semibold hover:bg-black transition-colors">Request a Detailed Quote</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. FAQ Section -->
+        <section id="faq" class="py-24 bg-gray-50">
+            <div class="container mx-auto px-6 max-w-screen-xl">
+                 <h2 class="mb-8 text-4xl tracking-tight font-extrabold text-gray-900 text-center">
+                    Frequently Asked Questions
+                </h2>
+                <div class="grid pt-8 text-left border-t border-gray-200 md:gap-16 md:grid-cols-2">
+                    <div>
+                        <div class="mb-10">
+                            <h3 class="flex items-center mb-4 text-lg font-medium text-gray-900">
+                               <i data-lucide="help-circle" class="flex-shrink-0 mr-2 w-5 h-5 text-sky-500"></i>
+                                What areas do you service?
+                            </h3>
+                            <p class="text-gray-500 pl-7">
+                                Pinnacle Construction and Projects is based in Kempton Park, and we proudly serve clients throughout the entire Gauteng province and across South Africa for larger projects. Contact us to confirm if we service your specific location.
+                            </p>
+                        </div>
+                        <div class="mb-10">
+                            <h3 class="flex items-center mb-4 text-lg font-medium text-gray-900">
+                                <i data-lucide="help-circle" class="flex-shrink-0 mr-2 w-5 h-5 text-sky-500"></i>
+                                How long does a typical paving project take?
+                            </h3>
+                            <p class="text-gray-500 pl-7">
+                                The duration of a project depends on its size and complexity. A standard residential driveway can often be completed within 2-4 days, while larger commercial parking lots or road sections will take longer. We provide a detailed project timeline with every quote.
+                            </p>
+                        </div>
+                    </div>                    
+                    <div>
+                        <div class="mb-10">
+                            <h3 class="flex items-center mb-4 text-lg font-medium text-gray-900">
+                                <i data-lucide="help-circle" class="flex-shrink-0 mr-2 w-5 h-5 text-sky-500"></i>
+                                Do you offer warranties on your work?
+                            </h3>
+                            <p class="text-gray-500 pl-7">
+                               Yes, absolutely. We stand by the quality of our workmanship and materials. All our projects come with a comprehensive warranty. The specific terms and duration of the warranty will be clearly outlined in your project contract.
+                            </p>
+                        </div>
+                        <div class="mb-10">
+                            <h3 class="flex items-center mb-4 text-lg font-medium text-gray-900">
+                                <i data-lucide="help-circle" class="flex-shrink-0 mr-2 w-5 h-5 text-sky-500"></i>
+                                What materials do you use?
+                            </h3>
+                            <p class="text-gray-500 pl-7">
+                               We use only high-quality, SABS-approved materials from reputable suppliers to ensure the longevity and durability of our projects, whether it's asphalt, paving bricks, or building supplies.
+                            </p>
+                        </div>                        
+                    </div>                                    
+                </div>
+            </div>
+        </section>
+        
+        <!-- 10. Call to Action Section -->
+        <section id="cta" class="bg-off-white">
+             <div class="container mx-auto px-6">
+                <div class="relative isolate overflow-hidden bg-gray-900 px-6 py-24 text-center shadow-2xl rounded-2xl sm:px-16">
+                    <h2 class="mx-auto max-w-2xl text-3xl font-bold tracking-tight text-white sm:text-4xl">Ready to Start Your Project?</h2>
+                    <p class="mx-auto mt-6 max-w-xl text-lg leading-8 text-gray-300">Let's turn your vision into reality. Contact us today for a free, no-obligation consultation and quote.</p>
+                    <div class="mt-10 flex items-center justify-center gap-x-6">
+                        <a href="#contact" class="btn btn-primary text-base">Get a Free Quote</a>
+                    </div>
+                    <svg viewBox="0 0 1024 1024" class="absolute left-1/2 top-1/2 -z-10 h-[64rem] w-[64rem] -translate-x-1/2 [mask-image:radial-gradient(closest-side,white,transparent)]" aria-hidden="true">
+                        <circle cx="512" cy="512" r="512" fill="url(#8d958450-c69f-4251-94bc-4e091a323369)" fill-opacity="0.7" />
+                        <defs>
+                        <radialGradient id="8d958450-c69f-4251-94bc-4e091a323369">
+                            <stop stop-color="#7775D6" />
+                            <stop offset="1" stop-color="#0ea5e9" />
+                        </radialGradient>
+                        </defs>
+                    </svg>
+                </div>
+             </div>
+        </section>
+
+        <!-- 11. Contact Section -->
+        <section id="contact" class="py-24 bg-off-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center reveal">
+                    <h2 class="section-heading">Let's Build Together</h2>
+                    <p class="section-subheading">Ready to start your next project? Get in touch with our expert team today!</p>
+                </div>
+                <div class="mt-16 max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 p-8 rounded-xl reveal">
+                    <div class="flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-3xl font-bold text-gray-800 mb-4">Get in Touch Directly</h3>
+                            <p class="text-gray-600 mb-8 leading-relaxed">Feel free to call us or send an email. We are here to answer any questions you may have and to provide a detailed, no-obligation quote for your project.</p>
+                            <div class="space-y-6">
+                                <div class="flex items-start space-x-4">
+                                    <div class="bg-sky-100 p-3 rounded-full"><i data-lucide="phone" class="w-6 h-6 text-sky-600"></i></div>
+                                    <div>
+                                        <p class="font-semibold text-lg">Phone</p>
+                                        <a href="tel:+27787156851" class="text-gray-600 hover:text-sky-500 transition-colors">+27 78 715 6851</a>
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-4">
+                                    <div class="bg-sky-100 p-3 rounded-full"><i data-lucide="mail" class="w-6 h-6 text-sky-600"></i></div>
+                                    <div>
+                                        <p class="font-semibold text-lg">Email</p>
+                                        <a href="mailto:info@pcpza.com" class="text-gray-600 hover:text-sky-500 transition-colors">info@pcpza.com</a>
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-4">
+                                    <div class="bg-sky-100 p-3 rounded-full"><i data-lucide="map-pin" class="w-6 h-6 text-sky-600"></i></div>
+                                    <div>
+                                        <p class="font-semibold text-lg">Address</p>
+                                        <p class="text-gray-600">Kempton Park, Gauteng, South Africa</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <form id="contactForm" class="space-y-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Name</label>
+                                <input type="text" id="name" name="name" required class="w-full py-3 px-4 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                                <input type="email" id="email" name="email" required class="w-full py-3 px-4 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone (Optional)</label>
+                            <input type="tel" id="phone" name="phone" class="w-full py-3 px-4 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500">
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Message</label>
+                            <textarea id="message" name="message" rows="5" required class="w-full py-3 px-4 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500"></textarea>
+                        </div>
+                        <div>
+                            <button type="submit" class="w-full btn btn-primary text-base">Send Message</button>
+                        </div>
+                        <p id="form-status" class="text-center text-sm mt-2 h-5"></p>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 12. Footer -->
+    <footer class="bg-gray-800 text-white">
+        <div class="container mx-auto px-6 py-16">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+                <div>
+                    <a href="#" class="-m-1.5 p-1.5 flex items-center transition-colors">
+                        <img src="assets/pcp-logo2.png" alt="Pinnacle Construction Logo" class="w-50 h-20 mr-2">
+                    </a>
+                    <p class="mt-4 text-gray-400 text-sm leading-relaxed">Your complete solution for construction, paving, and civil works. Delivering quality since 2023.</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold">Quick Links</h3>
+                    <ul class="mt-4 space-y-3 text-sm">
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-white transition-colors">Services</a></li>
+                        <li><a href="#projects" class="text-gray-400 hover:text-white transition-colors">Projects</a></li>
+                        <li><a href="#faq" class="text-gray-400 hover:text-white transition-colors">FAQ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold">Legal</h3>
+                     <ul class="mt-4 space-y-3 text-sm">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold">Follow Us</h3>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" aria-label="Facebook" class="text-gray-400 hover:text-white transition-colors"><i data-lucide="facebook" class="w-6 h-6"></i></a>
+                        <a href="#" aria-label="Twitter" class="text-gray-400 hover:text-white transition-colors"><i data-lucide="twitter" class="w-6 h-6"></i></a>
+                        <a href="#" aria-label="Instagram" class="text-gray-400 hover:text-white transition-colors"><i data-lucide="instagram" class="w-6 h-6"></i></a>
+                         <a href="#" aria-label="LinkedIn" class="text-gray-400 hover:text-white transition-colors"><i data-lucide="linkedin" class="w-6 h-6"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-12 pt-8 border-t border-gray-700 text-center text-gray-500 text-sm">
+                <p>&copy; <span id="current-year"></span> Pinnacle Construction and Projects. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Buttons -->
+    <a href="https://wa.me/27787156851" target="_blank" rel="noopener noreferrer" class="fixed bottom-4 right-4 z-50 bg-green-500 text-white p-3 rounded-full shadow-lg hover:bg-green-600 transition-colors flex items-center justify-center" aria-label="Chat on WhatsApp">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" viewBox="0 0 24 24" fill="white"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.894 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01s-.521.074-.792.372c-.272.296-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+    </a>
+    <button id="backToTopBtn" class="fixed bottom-20 right-4 z-50 bg-sky-500 text-white p-3 rounded-full shadow-lg hover:bg-sky-600 transition-opacity duration-300 opacity-0 invisible" aria-label="Back to top">
+        <i data-lucide="arrow-up" class="w-6 h-6"></i>
+    </button>
+
+    <script>
+        lucide.createIcons();
+
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // --- RESPONSIVE NAVIGATION ---
+            const header = document.getElementById('header');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileMenuPanel = document.getElementById('mobile-menu-panel');
+            const openButton = document.getElementById('mobile-menu-open-button');
+            const closeButton = document.getElementById('mobile-menu-close-button');
+            const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+            function openMobileMenu() {
+                mobileMenu.classList.remove('hidden');
+                setTimeout(() => {
+                    mobileMenuPanel.classList.remove('translate-x-full');
+                }, 10);
+            }
+
+            function closeMobileMenu() {
+                mobileMenuPanel.classList.add('translate-x-full');
+                setTimeout(() => {
+                    mobileMenu.classList.add('hidden');
+                }, 300);
+            }
+
+            openButton.addEventListener('click', openMobileMenu);
+            closeButton.addEventListener('click', closeMobileMenu);
+            mobileNavLinks.forEach(link => link.addEventListener('click', closeMobileMenu));
+            document.getElementById('mobile-menu-backdrop').addEventListener('click', closeMobileMenu);
+
+
+            // --- STICKY NAVIGATION ON SCROLL ---
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 10) { // Switches nav style after scrolling 10px
+                    header.classList.add('sticky-nav', 'header-dark');
+                    header.classList.remove('absolute', 'header-light');
+                } else {
+                    header.classList.remove('sticky-nav', 'header-dark');
+                    header.classList.add('absolute', 'header-light');
+                }
+            });
+
+            // --- SCROLL REVEAL ANIMATIONS ---
+            const revealElements = document.querySelectorAll('.reveal');
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        const delay = entry.target.style.transitionDelay || `${index * 50}ms`;
+                        entry.target.style.transitionDelay = delay;
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            revealElements.forEach(el => revealObserver.observe(el));
+            
+            // --- QUOTE CALCULATOR ---
+            const calculateQuoteBtn = document.getElementById('calculateQuoteBtn');
+            if (calculateQuoteBtn) {
+                calculateQuoteBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const service = document.getElementById('serviceType').value;
+                    const area = parseFloat(document.getElementById('area').value);
+                    const condition = document.getElementById('surfaceCondition').value;
+                    const quoteResultEl = document.getElementById('quoteResult');
+                    
+                    if (isNaN(area) || area <= 0) {
+                        quoteResultEl.textContent = "R 0.00";
+                        // Replaced alert with a more user-friendly notification if needed, for now just resetting is fine.
+                        document.getElementById('area').focus();
+                        return;
+                    }
+                    
+                    let costPerSqM = 0;
+                    let conditionMultiplier = 1;
+
+                    const serviceCosts = {
+                        asphalt: 180, potholes: 90, paving: 250, cobblestone: 350,
+                        pool: 3500, tennis_court: 450, retaining_wall: 1200, building: 4000
+                    };
+                    costPerSqM = serviceCosts[service] || 0;
+
+                    switch(condition) {
+                        case 'heavy': conditionMultiplier = 1.25; break;
+                        case 'premium': conditionMultiplier = 1.6; break;
+                    }
+                    
+                    const totalCost = area * costPerSqM * conditionMultiplier;
+                    
+                    quoteResultEl.textContent = `R ${totalCost.toLocaleString('en-ZA', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+                });
+            }
+            
+            // --- PROJECTS GALLERY (PORTFOLIO) ---
+            const allProjects = [
+                // Interleaved projects
+                { id: 1, category: 'civil', img: 'assets/group101.jpg', title: 'Municipal Road Tarring', location: 'Johannesburg' },
+                { id: 4, category: 'outdoor', img: 'assets/group201.jpg', title: 'Community Sports Court', location: 'Sandton' },
+                { id: 7, category: 'paving', img: 'assets/group301.jpg', title: 'Cobblestone Driveway Installation', location: 'Kempton Park' },
+                { id: 10, category: 'building', img: 'assets/group401.jpg', title: 'Foundation Slab Pour', location: 'Bedfordview' }, // Updated image and title for building foundation
+                { id: 2, category: 'civil', img: 'assets/group107.jpg', title: 'Commercial Site Earthworks', location: 'Midrand' },
+                { id: 5, category: 'outdoor', img: 'assets/group202.jpg', title: 'Residential Swimming Pool', location: 'Pretoria' },
+                { id: 8, category: 'paving', img: 'assets/group304.jpg', title: 'Herringbone Paving Design', location: 'Fourways' },
+                { id: 11, category: 'building', img: 'assets/group404.jpg', title: 'Residential Brickwork Installation', location: 'Rosebank' }, // Updated image and title for building walls
+                { id: 3, category: 'civil', img: 'assets/group102.jpg', title: 'Go-Kart Track Construction', location: 'N3 Highway' },
+                { id: 6, category: 'outdoor', img: 'assets/group203.jpg', title: 'Zen Garden Water Feature', location: 'Roodepoort' },
+                { id: 9, category: 'paving', img: 'assets/group305.jpg', title: 'Industrial Paved Walkway', location: 'Centurion' },
+                { id: 12, category: 'building', img: 'assets/group403.jpg', title: 'Interior Tiling and Finishing', location: 'Bryanston' }, // Updated image and title for interior finishing
+            ];
+
+            const portfolioGrid = document.getElementById('portfolio-grid');
+            const loadMoreProjectsBtn = document.getElementById('load-more-projects');
+            const filterBtns = document.querySelectorAll('#portfolio-filters .filter-btn');
+            let displayedProjectsCount = 0;
+            let currentFilter = 'all';
+            const projectsPerPage = 6;
+
+            function renderProjects(projectsToRender) {
+                projectsToRender.forEach((project, index) => {
+                    const projectEl = document.createElement('div');
+                    projectEl.className = 'group relative overflow-hidden rounded-lg shadow-lg reveal';
+                    projectEl.style.transitionDelay = `${index * 100}ms`;
+                    projectEl.innerHTML = `
+                        <img src="${project.img}" alt="${project.title}" loading="lazy" class="w-full h-72 object-cover transform group-hover:scale-110 transition-transform duration-500 ease-in-out">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                        <div class="absolute bottom-0 left-0 p-6 text-white">
+                            <span class="text-xs bg-sky-500 text-white py-1 px-3 rounded-full uppercase font-bold tracking-wider">${project.category.replace('&', 'and')}</span>
+                            <h3 class="text-xl font-bold mt-2">${project.title}</h3>
+                            <p class="text-gray-300 flex items-center mt-1"><i data-lucide="map-pin" class="w-4 h-4 mr-1"></i>${project.location}</p>
+                        </div>
+                    `;
+                    if (portfolioGrid) portfolioGrid.appendChild(projectEl);
+                });
+                 lucide.createIcons();
+            }
+
+            function loadProjects() {
+                const loadMoreText = document.getElementById('load-more-text');
+                const loadMoreSpinner = document.getElementById('load-more-spinner');
+                loadMoreText.classList.add('hidden');
+                loadMoreSpinner.classList.remove('hidden');
+                
+                setTimeout(() => { 
+                    const filtered = currentFilter === 'all' ? allProjects : allProjects.filter(p => p.category === currentFilter);
+                    const projectsToLoad = filtered.slice(displayedProjectsCount, displayedProjectsCount + projectsPerPage);
+                    renderProjects(projectsToLoad);
+                    displayedProjectsCount += projectsToLoad.length;
+                    
+                    document.querySelectorAll('#portfolio-grid .reveal:not(.visible)').forEach(el => revealObserver.observe(el));
+                    
+                    if (loadMoreProjectsBtn) {
+                        loadMoreProjectsBtn.style.display = (displayedProjectsCount >= filtered.length) ? 'none' : 'flex';
+                    }
+                    loadMoreText.classList.remove('hidden');
+                    loadMoreSpinner.classList.add('hidden');
+                }, 500);
+            }
+
+            if (filterBtns.length > 0) {
+                 filterBtns.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        filterBtns.forEach(b => {
+                            b.classList.remove('active-filter', 'bg-sky-500', 'text-white');
+                            b.setAttribute('aria-selected', 'false');
+                        });
+                        btn.classList.add('active-filter', 'bg-sky-500', 'text-white');
+                        btn.setAttribute('aria-selected', 'true');
+                        currentFilter = btn.dataset.filter;
+                        if(portfolioGrid) portfolioGrid.innerHTML = '';
+                        displayedProjectsCount = 0;
+                        loadProjects();
+                    });
+                });
+            }
+           
+            if (loadMoreProjectsBtn) loadMoreProjectsBtn.addEventListener('click', loadProjects);
+            if (portfolioGrid) loadProjects();
+
+            // --- TESTIMONIALS CAROUSEL ---
+            const allTestimonials = [
+                { name: 'John D.', company: 'Commercial Property Owner', text: 'Pinnacle transformed our aging parking lot into a professional and safe area. The quality of work is outstanding. Highly recommended.'},
+                { name: 'Sarah L.', company: 'Homeowner', text: 'From the initial quote to the final brick laid, the team was professional and efficient. My new driveway looks fantastic!'},
+                { name: 'David R.', company: 'Estate Manager', text: 'The road resurfacing project for our entire estate was handled flawlessly. They finished ahead of schedule and within budget.'},
+                { name: 'Emily T.', company: 'Homeowner', text: 'We are so happy with our new swimming pool. The team was clean, respectful, and the final result exceeded our expectations.'},
+                { name: 'Michael B.', company: 'Logistics Company', text: 'The paving for our truck yard has held up incredibly well under heavy traffic. Pinnacle provides durable, high-quality solutions.'}
+            ];
+
+            const track = document.getElementById('testimonial-track');
+            const nextButton = document.getElementById('testimonial-next');
+            const prevButton = document.getElementById('testimonial-prev');
+            let testimonialIndex = 0;
+            let testimonialInterval;
+
+            function setupTestimonials() {
+                if(!track) return;
+                const testimonialsToRender = [...allTestimonials, ...allTestimonials];
+
+                track.innerHTML = testimonialsToRender.map((t, index) => `
+                    <div class="testimonial-slide" role="group" aria-roledescription="slide" aria-label="${index + 1} of ${allTestimonials.length}">
+                        <div class="bg-gray-50 p-8 rounded-lg border border-gray-100 h-full flex flex-col">
+                            <i data-lucide="quote" class="w-8 h-8 text-sky-300"></i>
+                            <p class="text-gray-600 my-4 text-lg flex-grow">"${t.text}"</p>
+                            <div class="mt-4">
+                                <p class="font-bold text-lg">${t.name}</p>
+                                <p class="text-sm text-gray-500">${t.company}</p>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+                lucide.createIcons();
+                startTestimonialAutoplay();
+            }
+
+            const updateTestimonialPosition = () => {
+                if(!track) return;
+                const slideWidth = track.querySelector('.testimonial-slide').clientWidth;
+                track.style.transform = `translateX(-${testimonialIndex * slideWidth}px)`;
+
+                if (testimonialIndex >= allTestimonials.length) {
+                    setTimeout(() => {
+                        track.style.transition = 'none';
+                        testimonialIndex = 0;
+                        track.style.transform = `translateX(0px)`;
+                        setTimeout(() => track.style.transition = 'transform 0.5s ease-in-out', 50);
+                    }, 500);
+                }
+            }
+
+            const moveNext = () => {
+                testimonialIndex++;
+                updateTestimonialPosition();
+            }
+
+            const movePrev = () => {
+                 if(!track) return;
+                if (testimonialIndex === 0) {
+                    testimonialIndex = allTestimonials.length;
+                    track.style.transition = 'none';
+                    const slideWidth = track.querySelector('.testimonial-slide').clientWidth;
+                    track.style.transform = `translateX(-${testimonialIndex * slideWidth}px)`;
+                    setTimeout(() => {
+                         track.style.transition = 'transform 0.5s ease-in-out';
+                         testimonialIndex--;
+                         updateTestimonialPosition();
+                    }, 50);
+                } else {
+                    testimonialIndex--;
+                    updateTestimonialPosition();
+                }
+            }
+
+            const startTestimonialAutoplay = () => {
+                testimonialInterval = setInterval(moveNext, 5000);
+            }
+
+            if(track) {
+                setupTestimonials();
+                nextButton.addEventListener('click', () => {
+                    moveNext();
+                    clearInterval(testimonialInterval);
+                    startTestimonialAutoplay();
+                });
+                prevButton.addEventListener('click', () => {
+                    movePrev();
+                    clearInterval(testimonialInterval);
+                    startTestimonialAutoplay();
+                });
+                track.parentElement.addEventListener('mouseenter', () => clearInterval(testimonialInterval));
+                track.parentElement.addEventListener('mouseleave', startTestimonialAutoplay);
+            }
+
+
+            // --- FAQ ACCORDION ---
+            const faqItems = document.querySelectorAll('.faq-item');
+            if (faqItems.length === 0) { 
+                lucide.createIcons(); 
+            } else {
+                 faqItems.forEach(item => {
+                    const question = item.querySelector('.faq-question');
+                    question.addEventListener('click', () => {
+                        const isExpanded = question.getAttribute('aria-expanded') === 'true';
+                        const answer = item.querySelector('.faq-answer');
+                        const icon = item.querySelector('i');
+
+                        faqItems.forEach(otherItem => {
+                            if (otherItem !== item) {
+                                otherItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+                                otherItem.querySelector('.faq-answer').style.maxHeight = null;
+                                otherItem.querySelector('i').classList.remove('rotate-180');
+                            }
+                        });
+                        
+                        if (isExpanded) {
+                            question.setAttribute('aria-expanded', 'false');
+                            answer.style.maxHeight = null;
+                            icon.classList.remove('rotate-180');
+                        } else {
+                            question.setAttribute('aria-expanded', 'true');
+                            answer.style.maxHeight = answer.scrollHeight + 'px';
+                            icon.classList.add('rotate-180');
+                        }
+                    });
+                });
+            }
+            
+            // --- CONTACT FORM ---
+            const contactForm = document.getElementById('contactForm');
+            const formStatus = document.getElementById('form-status');
+            if(contactForm) {
+                contactForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    if(formStatus) {
+                        formStatus.textContent = 'Sending message...';
+                        formStatus.className = 'text-center text-sm mt-2 text-blue-600';
+                    }
+                    
+                    setTimeout(() => {
+                        if(formStatus) {
+                            formStatus.textContent = 'Thank you! Your message has been sent successfully.';
+                            formStatus.className = 'text-center text-sm mt-2 text-green-600';
+                        }
+                        contactForm.reset();
+                        setTimeout(() => { if(formStatus) formStatus.textContent = '' }, 5000);
+                    }, 1500);
+                });
+            }
+
+            // --- FOOTER YEAR ---
+            const currentYearEl = document.getElementById('current-year');
+            if (currentYearEl) {
+                currentYearEl.textContent = new Date().getFullYear();
+            }
+
+            // --- BACK TO TOP BUTTON ---
+            const backToTopBtn = document.getElementById('backToTopBtn');
+
+            if (backToTopBtn) {
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 300) {
+                        backToTopBtn.classList.remove('opacity-0', 'invisible');
+                    } else {
+                        backToTopBtn.classList.add('opacity-0', 'invisible');
+                    }
+                });
+
+                backToTopBtn.addEventListener('click', () => {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+            
+        });
+    </script>
+</body>
+</html>
