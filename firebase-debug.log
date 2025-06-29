@@ -26,3 +26,55 @@ Before we get started, keep in mind:
 
 [debug] [2025-06-29T17:06:14.568Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
 [debug] [2025-06-29T17:06:14.569Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2025-06-29T17:07:05.931Z] Checked if tokens are valid: false, expires at: 1751022308445
+[debug] [2025-06-29T17:07:05.931Z] Checked if tokens are valid: false, expires at: 1751022308445
+[debug] [2025-06-29T17:07:05.932Z] > refreshing access token with scopes: []
+[debug] [2025-06-29T17:07:05.933Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2025-06-29T17:07:05.934Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-06-29T17:07:06.433Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2025-06-29T17:07:06.433Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-06-29T17:07:06.442Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=100
+[debug] [2025-06-29T17:07:07.235Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2025-06-29T17:07:07.235Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[info] i  Using project pinnacleprojects-8a669 (PinnacleProjects) 
+[info] 
+=== Hosting Setup
+[debug] [2025-06-29T17:07:10.942Z] Checked if tokens are valid: true, expires at: 1751220425433
+[debug] [2025-06-29T17:07:10.942Z] Checked if tokens are valid: true, expires at: 1751220425433
+[debug] [2025-06-29T17:07:10.942Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/pinnacleprojects-8a669 [none]
+[debug] [2025-06-29T17:07:11.314Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/pinnacleprojects-8a669 200
+[debug] [2025-06-29T17:07:11.314Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/pinnacleprojects-8a669 {"projectId":"pinnacleprojects-8a669","projectNumber":"234259777672","displayName":"PinnacleProjects","name":"projects/pinnacleprojects-8a669","resources":{"hostingSite":"pinnacleprojects-8a669"},"state":"ACTIVE","etag":"1_ffe9e7f0-2a9e-489d-af97-d4830bfce903"}
+[info] 
+[info] Your public directory is the folder (relative to your project directory) that
+[info] will contain Hosting assets to be uploaded with firebase deploy. If you
+[info] have a build process for your assets, use your build's output directory.
+[info] 
+[debug] [2025-06-29T17:07:51.001Z] >>> [apiv2][query] GET https://www.gstatic.com/firebasejs/releases.json [none]
+[debug] [2025-06-29T17:07:51.438Z] <<< [apiv2][status] GET https://www.gstatic.com/firebasejs/releases.json 200
+[debug] [2025-06-29T17:07:51.438Z] <<< [apiv2][body] GET https://www.gstatic.com/firebasejs/releases.json {"current":{"version":"11.9.1","browserURL":"https://www.gstatic.com/firebasejs/11.9.1/firebase.js","packageURL":"https://www.gstatic.com/firebasejs/11.9.1/firebase.tgz"},"live":{"version":"11.9","browserURL":"https://www.gstatic.com/firebasejs/live/11.9/firebase.js","packageURL":"https://www.gstatic.com/firebasejs/live/11.9/firebase.tgz"},"components":{"ai":"https://www.gstatic.com/firebasejs/11.9.1/firebase-ai.js","analytics":"https://www.gstatic.com/firebasejs/11.9.1/firebase-analytics.js","app":"https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js","app-check":"https://www.gstatic.com/firebasejs/11.9.1/firebase-app-check.js","auth":"https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js","auth/cordova":"https://www.gstatic.com/firebasejs/11.9.1/firebase-auth/cordova.js","auth/web-extension":"https://www.gstatic.com/firebasejs/11.9.1/firebase-auth/web-extension.js","functions":"https://www.gstatic.com/firebasejs/11.9.1/firebase-functions.js","firestore":"https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js","firestore/lite":"https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore/lite.js","installations":"https://www.gstatic.com/firebasejs/11.9.1/firebase-installations.js","storage":"https://www.gstatic.com/firebasejs/11.9.1/firebase-storage.js","performance":"https://www.gstatic.com/firebasejs/11.9.1/firebase-performance.js","remote-config":"https://www.gstatic.com/firebasejs/11.9.1/firebase-remote-config.js","messaging":"https://www.gstatic.com/firebasejs/11.9.1/firebase-messaging.js","messaging/sw":"https://www.gstatic.com/firebasejs/11.9.1/firebase-messaging/sw.js","database":"https://www.gstatic.com/firebasejs/11.9.1/firebase-database.js","vertexai":"https://www.gstatic.com/firebasejs/11.9.1/firebase-vertexai.js","data-connect":"https://www.gstatic.com/firebasejs/11.9.1/firebase-data-connect.js","firestore.memory":"https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.memory.js"}}
+[info] +  Wrote  pinnacleprojects/index.html 
+[info] 
+[info] i  Didn't detect a .git folder. Assuming C:\code\PinnacleProjects is the project root. 
+[info] i  Authorizing with GitHub to upload your service account to a GitHub repository's secrets store. 
+[info] 
+[info] Visit this URL on this device to log in:
+[info] https://github.com/login/oauth/authorize?client_id=89cf50f02ac6aaed3484&state=99866361&redirect_uri=http%3A%2F%2Flocalhost%3A9005&scope=read%3Auser%20repo%20public_repo
+[info] 
+[info] Waiting for authentication...
+[debug] [2025-06-29T17:07:52.158Z] >>> [apiv2][query] POST https://github.com/login/oauth/access_token [none]
+[debug] [2025-06-29T17:07:52.159Z] >>> [apiv2][body] POST https://github.com/login/oauth/access_token [stream]
+[debug] [2025-06-29T17:07:52.565Z] <<< [apiv2][status] POST https://github.com/login/oauth/access_token 200
+[debug] [2025-06-29T17:07:52.565Z] <<< [apiv2][body] POST https://github.com/login/oauth/access_token {"access_token":"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","token_type":"bearer","scope":"read:user,repo"}
+[debug] [2025-06-29T17:07:52.570Z] >>> [apiv2][query] GET https://api.github.com/user [none]
+[debug] [2025-06-29T17:07:54.137Z] <<< [apiv2][status] GET https://api.github.com/user 200
+[debug] [2025-06-29T17:07:54.137Z] <<< [apiv2][body] GET https://api.github.com/user {"login":"JasonTinotenda","id":111620911,"node_id":"U_kgDOBqczLw","avatar_url":"https://avatars.githubusercontent.com/u/111620911?v=4","gravatar_id":"","url":"https://api.github.com/users/JasonTinotenda","html_url":"https://github.com/JasonTinotenda","followers_url":"https://api.github.com/users/JasonTinotenda/followers","following_url":"https://api.github.com/users/JasonTinotenda/following{/other_user}","gists_url":"https://api.github.com/users/JasonTinotenda/gists{/gist_id}","starred_url":"https://api.github.com/users/JasonTinotenda/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/JasonTinotenda/subscriptions","organizations_url":"https://api.github.com/users/JasonTinotenda/orgs","repos_url":"https://api.github.com/users/JasonTinotenda/repos","events_url":"https://api.github.com/users/JasonTinotenda/events{/privacy}","received_events_url":"https://api.github.com/users/JasonTinotenda/received_events","type":"User","user_view_type":"private","site_admin":false,"name":"sirJason","company":null,"blog":"","location":"Harare, Zimbabwe","email":null,"hireable":null,"bio":"Aspiring to be the best at what i do. ","twitter_username":null,"notification_email":null,"public_repos":12,"public_gists":0,"followers":5,"following":38,"created_at":"2022-08-20T02:01:15Z","updated_at":"2025-05-02T13:28:49Z","private_gists":0,"total_private_repos":14,"owned_private_repos":13,"disk_usage":289158,"collaborators":3,"two_factor_authentication":false,"plan":{"name":"free","space":976562499,"collaborators":0,"private_repos":10000}}
+[info] 
+[info] +  Success! Logged into GitHub as JasonTinotenda 
+[info] 
