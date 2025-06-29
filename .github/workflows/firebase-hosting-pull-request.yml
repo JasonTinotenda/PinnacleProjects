@@ -13,9 +13,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: npm start
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
-          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PINNACLEPROJECTS_8A669 }}
-          projectId: pinnacleprojects-8a669
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PINNACLEPROJECTS_CONSTRUCTION }}
+          projectId: pinnacleprojects-construction
